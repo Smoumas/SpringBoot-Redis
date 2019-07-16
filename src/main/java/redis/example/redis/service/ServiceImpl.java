@@ -2,6 +2,8 @@ package redis.example.redis.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
 //实际开发中的Service，此处只是写个示例
@@ -12,6 +14,9 @@ public class ServiceImpl {
     private RedisTemplate<Object,Object> redisTemplate;
 
     public String message(){
+        RedisSerializer redisSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(redisSerializer);
+
         String message = (String)redisTemplate.opsForValue().get("message");
         if(message == null){
             //若缓存中message为空，则从数据库中查询，并放入缓存中
