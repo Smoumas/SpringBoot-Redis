@@ -9,7 +9,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * 指定Redis的序列化方式，若不指定，则key的字符会在指定的字符前多加几个字符
- * 如指定key为message，实际存储为"\xac\xed\x00\x05t\x00\amessage"
+ * 如指定key为message，实际存储为"\xac\xed\x00\x05t\x00\amessage"，但是通过程序是可以正常取值的，只是在客户端中查看需要使用实际的key查询
  */
 @Configuration
 public class RedisConfig {
